@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Login API</title>
+</head>
+<body>
+    <h1>Test Login - Staff 4038</h1>
+    <button onclick="testLogin()">Test Login</button>
+    <pre id="result"></pre>
+
+    <script>
+        async function testLogin() {
+            const result = document.getElementById('result');
+            result.textContent = 'Testing...';
+            
+            try {
+                const response = await fetch('http://localhost/persis/public/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        staff_id: '4038',
+                        no_kp: '960919025931'
+                    })
+                });
+
+                const data = await response.json();
+                result.textContent = 'Status: ' + response.status + '\n\n' + JSON.stringify(data, null, 2);
+                
+                if (data.success) {
+                    alert('Login Success!\nToken: ' + data.data.token);
+                }
+            } catch (error) {
+                result.textContent = 'Error: ' + error.message;
+            }
+        }
+
+        // Auto test on load
+        window.onload = () => testLogin();
+    </script>
+</body>
+</html>
