@@ -19,6 +19,7 @@ Route::apiResource('seksyen', \App\Http\Controllers\Api\SeksyenController::class
 Route::apiResource('status-gred', \App\Http\Controllers\Api\StatusGredController::class);
 Route::apiResource('status', \App\Http\Controllers\Api\StatusController::class);
 Route::apiResource('gelaran', \App\Http\Controllers\Api\GelaranController::class);
+Route::apiResource('persis-login', \App\Http\Controllers\Api\PersisLoginController::class);
 
 // Authentication routes
 Route::post('/login', [AuthController::class, 'login']);

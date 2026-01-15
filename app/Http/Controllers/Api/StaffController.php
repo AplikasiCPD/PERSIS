@@ -21,10 +21,14 @@ class StaffController extends Controller
 
     public function __construct()
     {
-        // Require authentication for all methods
+        // Require authentication for all methods except index and show
         $this->middleware('auth:sanctum')->except(['index', 'show']);
         
-        $this->authorizeResource(Staff::class, 'staff');
+        // Apply authorization only to specific actions
+        // Exclude 'create' and 'store' to allow public staff creation
+        $this->authorizeResource(Staff::class, 'staff', [
+            'except' => ['create', 'store'],
+        ]);
     }
 
 

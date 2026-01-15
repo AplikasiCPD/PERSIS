@@ -70,7 +70,7 @@ return [
         ],
         'staff' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Staff::class,
+            'model' => App\Models\PersisLogin::class,
         ],
 
         // 'users' => [
