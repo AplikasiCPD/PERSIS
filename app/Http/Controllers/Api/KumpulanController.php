@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kumpulan;
 use Illuminate\Http\Request;
-use App\Models\Status;
 
-class StatusController extends Controller
+class KumpulanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Status::all();
+        return Kumpulan::all();
     }
 
     /**
@@ -21,47 +21,47 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        $status = Status::create([
+        $kumpulan = Kumpulan::create([
             ...$request->validate([
-                'status_code' => 'required|string|max:10',
-                'status_desc' => 'required|string|max:255',
+                'kod_kump' => 'required|string|max:10',
+                'info_kod' => 'required|string|max:100',
             ]),
         ]);
 
-        return $status;
+        return $kumpulan;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Status $status)
+    public function show(Kumpulan $kumpulan)
     {
-        return $status;
+        return $kumpulan;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Status $status)
+    public function update(Request $request, Kumpulan $kumpulan)
     {
         $validated = $request->validate([
-            'status_desc' => 'required|string|max:255',
+            'info_kod' => 'required|string|max:100',
         ]);
 
-        $status->update($validated);
+        $kumpulan->update($validated);
 
-        return $status;
+        return $kumpulan;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Status $status)
+    public function destroy(Kumpulan $kumpulan)
     {
-        $status->delete();
+        $kumpulan->delete();
 
         return response()->json([
-            'message' => 'Status berjaya dihapuskan'
+            'message' => 'Kumpulan berjaya dihapuskan'
         ], 200);
     }
 }

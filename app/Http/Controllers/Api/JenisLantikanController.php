@@ -21,30 +21,47 @@ class JenisLantikanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jenis = JenisLantikan::create([
+            ...$request->validate([
+                'kod_lantikan' => 'required|string|max:10',
+                'info_lantikan' => 'required|string|max:100',
+            ]),
+        ]);
+
+        return $jenis;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(JenisLantikan $jenisLantikan)
     {
-        //
+        return $jenisLantikan;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, JenisLantikan $jenisLantikan)
     {
-        //
+        $validated = $request->validate([
+            'info_lantikan' => 'required|string|max:100',
+        ]);
+
+        $jenisLantikan->update($validated);
+
+        return $jenisLantikan;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(JenisLantikan $jenisLantikan)
     {
-        //
+        $jenisLantikan->delete();
+
+        return response()->json([
+            'message' => 'Jenis lantikan berjaya dihapuskan'
+        ], 200);
     }
 }

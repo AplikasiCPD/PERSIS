@@ -11,6 +11,18 @@ class Gred extends Model
     protected $primaryKey = 'kod_gred';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'kod_gred',
+        'info_gred',
+        'gaji_min',
+        'gaji_max',
+        'kenaikan',
+        'kod_jawatan',
+        'kod_kump',
+        'status_gred'
+    ];
 
     public function Staff(): BelongsTo
     {

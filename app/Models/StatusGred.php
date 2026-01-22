@@ -11,6 +11,12 @@ class StatusGred extends Model
     protected $primaryKey = 'kod_status';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'kod_status',
+        'status_gred',
+    ];
 
     public function Staff(): BelongsTo
     {

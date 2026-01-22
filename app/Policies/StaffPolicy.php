@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\Response;
+use App\Models\PersisLogin;
 use App\Models\Staff;
 
 class StaffPolicy
@@ -11,7 +12,7 @@ class StaffPolicy
      * Determine whether the user can view any models.
      * All users (including guests) can view the list.
      */
-    public function viewAny(?Staff $authenticatedStaff): bool
+    public function viewAny(?PersisLogin $authenticatedStaff): bool
     {
         return true;
     }
@@ -20,7 +21,7 @@ class StaffPolicy
      * Determine whether the user can view the model.
      * Anyone can view staff profiles.
      */
-    public function view(?Staff $authenticatedStaff, Staff $staff): bool
+    public function view(?PersisLogin $authenticatedStaff, Staff $staff): bool
     {
         return true;
     }
@@ -29,7 +30,7 @@ class StaffPolicy
      * Determine whether the user can create models.
      * Only admin level users can create staff.
      */
-    public function create(Staff $authenticatedStaff): bool
+    public function create(PersisLogin $authenticatedStaff): bool
     {
         // Only admin level (1-3) can create new staff
         return $authenticatedStaff->user_level <= 3;
@@ -39,7 +40,7 @@ class StaffPolicy
      * Determine whether the user can update the model.
      * Staff can update their own profile, admin can update any.
      */
-    public function update(Staff $authenticatedStaff, Staff $staff): bool
+    public function update(PersisLogin $authenticatedStaff, Staff $staff): bool
     {
         // Admin level (1-3) can update any staff
         if ($authenticatedStaff->user_level <= 3) {
@@ -54,7 +55,7 @@ class StaffPolicy
      * Determine whether the user can delete the model.
      * Only super admin (level 1) can delete staff.
      */
-    public function delete(Staff $authenticatedStaff, Staff $staff): bool
+    public function delete(PersisLogin $authenticatedStaff, Staff $staff): bool
     {
         // Only super admin (level 1) can delete staff
         // And cannot delete themselves
@@ -66,7 +67,7 @@ class StaffPolicy
      * Determine whether the user can restore the model.
      * Only super admin can restore.
      */
-    public function restore(Staff $authenticatedStaff, Staff $staff): bool
+    public function restore(PersisLogin $authenticatedStaff, Staff $staff): bool
     {
         return $authenticatedStaff->user_level === 1;
     }
@@ -75,7 +76,7 @@ class StaffPolicy
      * Determine whether the user can permanently delete the model.
      * Only super admin can force delete.
      */
-    public function forceDelete(Staff $authenticatedStaff, Staff $staff): bool
+    public function forceDelete(PersisLogin $authenticatedStaff, Staff $staff): bool
     {
         return $authenticatedStaff->user_level === 1 
             && $authenticatedStaff->staff_id !== $staff->staff_id;

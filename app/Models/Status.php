@@ -11,6 +11,12 @@ class Status extends Model
     protected $primaryKey = 'status_code';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'status_code',
+        'status_desc',
+    ];
 
     public function Staff(): BelongsTo
     {

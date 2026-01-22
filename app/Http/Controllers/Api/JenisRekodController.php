@@ -21,30 +21,47 @@ class JenisRekodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jenis = JenisRekod::create([
+            ...$request->validate([
+                'kod_rekod' => 'required|string|max:10',
+                'info_rekod' => 'required|string|max:100',
+            ]),
+        ]);
+
+        return $jenis;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(JenisRekod $jenisRekod)
     {
-        //
+        return $jenisRekod;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, JenisRekod $jenisRekod)
     {
-        //
+        $validated = $request->validate([
+            'info_rekod' => 'required|string|max:100',
+        ]);
+
+        $jenisRekod->update($validated);
+
+        return $jenisRekod;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(JenisRekod $jenisRekod)
     {
-        //
+        $jenisRekod->delete();
+
+        return response()->json([
+            'message' => 'Jenis rekod berjaya dihapuskan'
+        ], 200);
     }
 }

@@ -21,30 +21,47 @@ class JantinaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jantina = Jantina::create([
+            ...$request->validate([
+                'kod_jantina' => 'required|string|max:1',
+                'info_jantina' => 'required|string|max:100',
+            ]),
+        ]);
+
+        return $jantina;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Jantina $jantina)
     {
-        //
+        return $jantina;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Jantina $jantina)
     {
-        //
+        $validated = $request->validate([
+            'info_jantina' => 'required|string|max:100',
+        ]);
+
+        $jantina->update($validated);
+
+        return $jantina;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Jantina $jantina)
     {
-        //
+        $jantina->delete();
+
+        return response()->json([
+            'message' => 'Jantina berjaya dihapuskan'
+        ], 200);
     }
 }

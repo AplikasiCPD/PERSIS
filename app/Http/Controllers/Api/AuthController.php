@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Staff;
+use App\Models\PersisLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -17,25 +17,25 @@ class AuthController extends Controller
     {
         $request->validate([
             'staff_id' => 'required|string',
-            'no_kp' => 'required|string',
+            'user_pwd' => 'required|string',
         ]);
 
-        $staff = Staff::where('staff_id', $request->staff_id)->first();
+        $login = PersisLogin::where('staff_id', $request->staff_id)->first();
 
-        if (!$staff || $staff->no_kp !== $request->no_kp) {
+        if (!$login || $login->user_pwd !== $request->user_pwd) {
             throw ValidationException::withMessages([
-                'staff_id' => ['The provided credentials are incorrect.'],
+                'staff_id' => ['ID atau kata laluan tidak sah.'],
             ]);
         }
 
         // Create token for the staff
-        $token = $staff->createToken('api-token')->plainTextToken;
+        $token = $login->createToken('api-token')->plainTextToken;
 
         return response()->json([
             'success' => true,
             'message' => 'Login successful',
             'data' => [
-                'staff' => $staff,
+                'login' => $login,
                 'token' => $token,
             ],
         ], 200);

@@ -11,6 +11,12 @@ class Seksyen extends Model
     protected $primaryKey = 'kod_seksyen';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'kod_seksyen',
+        'info_seksyen'
+    ];
 
     public function Staff(): BelongsTo
     {
