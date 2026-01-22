@@ -11,6 +11,12 @@ class Bangsa extends Model
     protected $primaryKey = 'kod_bangsa';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'kod_bangsa',
+        'info_bangsa',
+    ];
 
     public function Staff(): BelongsTo
     {

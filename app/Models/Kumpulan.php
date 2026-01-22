@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Agama extends Model
+class Kumpulan extends Model
 {
-    protected $table = 'agama';
-    protected $primaryKey = 'kod_agama';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $table = 'kumpulan';
+    protected $primaryKey = 'kod_kump';
     public $timestamps = false;
 
     protected $fillable = [
-        'kod_agama',
-        'info_agama',
+        'kod_kump',
+        'info_kod',
     ];
 
     public function Staff(): BelongsTo

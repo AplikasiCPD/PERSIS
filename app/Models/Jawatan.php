@@ -11,6 +11,13 @@ class Jawatan extends Model
     protected $primaryKey = 'kod_jawatan';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'kod_jawatan',
+        'info_jawatan',
+        'status'
+    ];
 
     public function Staff(): BelongsTo
     {

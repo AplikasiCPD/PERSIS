@@ -14,6 +14,12 @@ class Jantina extends Model
     protected $primaryKey = 'kod_jantina';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'kod_jantina',
+        'info_jantina'
+    ];
 
     public function Staff(): BelongsTo
     {

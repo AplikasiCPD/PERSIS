@@ -21,30 +21,49 @@ class BahagianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bahagian = Bahagian::create([
+            ...$request->validate([
+                'kod_bhgn' => 'required|integer',
+                'info_bhgn' => 'required|string|max:100',
+                'singkatan' => 'required|string|max:10',
+            ]),
+        ]);
+
+        return $bahagian;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Bahagian $bahagian)
     {
-        //
+        return $bahagian;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Bahagian $bahagian)
     {
-        //
+        $validated = $request->validate([
+            'info_bhgn' => 'required|string|max:100',
+            'singkatan' => 'required|string|max:10',
+        ]);
+
+        $bahagian->update($validated);
+
+        return $bahagian;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Bahagian $bahagian)
     {
-        //
+        $bahagian->delete();
+
+        return response()->json([
+            'message' => 'Bahagian berjaya dihapuskan'
+        ], 200);
     }
 }

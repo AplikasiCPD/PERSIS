@@ -11,6 +11,12 @@ class Gelaran extends Model
     protected $primaryKey = 'kod_gelaran';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'kod_gelaran',
+        'info_gelaran',
+    ];
 
     public function Staff(): BelongsTo
     {

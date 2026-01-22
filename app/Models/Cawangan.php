@@ -11,6 +11,18 @@ class Cawangan extends Model
     protected $primaryKey = 'kod_caw';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'kod_caw',
+        'info_caw',
+        'kod_bhgn'
+    ];
+
+    public function bahagian(): BelongsTo
+    {
+        return $this->belongsTo(Bahagian::class, 'kod_bhgn', 'kod_bhgn');
+    }
 
     public function Staff(): BelongsTo
     {

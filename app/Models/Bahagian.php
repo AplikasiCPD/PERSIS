@@ -11,6 +11,13 @@ class Bahagian extends Model
     protected $primaryKey = 'kod_bhgn';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'kod_bhgn',
+        'info_bhgn',
+        'singkatan'
+    ];
 
     public function Staff(): BelongsTo
     {

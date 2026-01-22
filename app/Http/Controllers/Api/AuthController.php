@@ -24,7 +24,7 @@ class AuthController extends Controller
 
         if (!$login || $login->user_pwd !== $request->user_pwd) {
             throw ValidationException::withMessages([
-                'staff_id' => ['The provided credentials are incorrect.'],
+                'staff_id' => ['ID atau kata laluan tidak sah.'],
             ]);
         }
 

@@ -21,30 +21,47 @@ class AgamaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $agama = Agama::create([
+            ...$request->validate([
+                'kod_agama' => 'required|string|max:10',
+                'info_agama' => 'required|string|max:100',
+            ]),
+        ]);
+
+        return $agama;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Agama $agama)
     {
-        //
+        return $agama;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Agama $agama)
     {
-        //
+        $validated = $request->validate([
+            'info_agama' => 'required|string|max:100',
+        ]);
+
+        $agama->update($validated);
+
+        return $agama;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Agama $agama)
     {
-        //
+        $agama->delete();
+
+        return response()->json([
+            'message' => 'Agama berjaya dihapuskan'
+        ], 200);
     }
 }

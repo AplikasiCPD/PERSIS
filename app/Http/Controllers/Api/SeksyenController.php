@@ -21,30 +21,47 @@ class SeksyenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $seksyen = Seksyen::create([
+            ...$request->validate([
+                'kod_seksyen' => 'required|string|max:10',
+                'info_seksyen' => 'required|string|max:100',
+            ]),
+        ]);
+
+        return $seksyen;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Seksyen $seksyen)
     {
-        //
+        return $seksyen;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Seksyen $seksyen)
     {
-        //
+        $validated = $request->validate([
+            'info_seksyen' => 'required|string|max:100',
+        ]);
+
+        $seksyen->update($validated);
+
+        return $seksyen;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Seksyen $seksyen)
     {
-        //
+        $seksyen->delete();
+
+        return response()->json([
+            'message' => 'Seksyen berjaya dihapuskan'
+        ], 200);
     }
 }

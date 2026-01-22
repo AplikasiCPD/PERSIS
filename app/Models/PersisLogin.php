@@ -13,14 +13,24 @@ class PersisLogin extends Authenticatable
     protected $primaryKey = 'staff_id';
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 
     protected $fillable = [
         'staff_id',
-        'no_kp',
         'user_pwd',
+        'user_level',
+        'info_level',
     ];
 
     protected $hidden = [
         'user_pwd',
     ];
+
+    /**
+     * Get the staff that owns the login.
+     */
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class, 'staff_id', 'staff_id');
+    }
 }

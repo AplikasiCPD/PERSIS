@@ -9,6 +9,12 @@ class JenisRekod extends Model
 {
     protected $table = 'jenis_rekod';
     protected $primaryKey = 'kod_rekod';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'kod_rekod',
+        'info_rekod',
+    ];
 
     public function Staff(): BelongsTo
     {
